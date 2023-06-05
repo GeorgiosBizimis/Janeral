@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="json-schema-core-1.2.14">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/json-schema-core-1.2.14.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
