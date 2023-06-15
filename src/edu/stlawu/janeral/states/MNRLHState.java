@@ -5,6 +5,7 @@ import edu.stlawu.janeral.err.EnableError;
 import edu.stlawu.janeral.err.PortDefError;
 import edu.stlawu.janeral.mnrl.*;
 
+import java.lang.constant.Constable;
 import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,6 @@ public class MNRLHState extends MNRLNode {
     public boolean isLatched() {
         return latched;
     }
-
     public MNRLOutputSymbols.StringSymbols getOutputSymbols() {
         return outputSymbols;
     }
@@ -22,20 +22,18 @@ public class MNRLHState extends MNRLNode {
     public void setLatched(boolean latched) {
         this.latched = latched;
     }
-
     public void setOutputSymbols(final MNRLOutputSymbols.StringSymbols outputSymbols) {
         this.outputSymbols = outputSymbols;
     }
 
     private boolean latched;
-
     private MNRLOutputSymbols.StringSymbols outputSymbols;
 
     public MNRLHState(final MNRLOutputSymbols.StringSymbols outputSymbols,
                       final int enable,
                       final String id,
                       final boolean report,
-                      final int reportId,
+                      final Constable reportId,
                       final boolean latched,
                       final MNRLAttributes attributes)
             throws EnableError, PortDefError {
@@ -45,9 +43,9 @@ public class MNRLHState extends MNRLNode {
                 List.of(new AbstractMap.SimpleEntry<>(MNRLDefs.H_STATE_OUTPUT, 1)),
                 attributes);
 
-        this.latched = latched;
-        this.reportId = reportId;
-        this.outputSymbols = new MNRLOutputSymbols().copyFrom(outputSymbols);
+        this.setLatched(latched);
+        this.setReportId(reportId);
+        this.setOutputSymbols(new MNRLOutputSymbols().copyFrom(outputSymbols));
     }
 
     public MNRLHState(final MNRLOutputSymbols.StringSymbols outputSymbols,
@@ -64,9 +62,9 @@ public class MNRLHState extends MNRLNode {
                 List.of(new AbstractMap.SimpleEntry<>(MNRLDefs.H_STATE_OUTPUT, 1)),
                 attributes);
 
-        this.latched = latched;
-        this.reportId = reportId;
-        this.outputSymbols = new MNRLOutputSymbols().copyFrom(outputSymbols);
+        this.setLatched(latched);
+        this.setReportId(reportId);
+        this.setOutputSymbols(new MNRLOutputSymbols().copyFrom(outputSymbols));
     }
 
     public MNRLHState(final MNRLOutputSymbols.StringSymbols outputSymbols,
@@ -82,16 +80,16 @@ public class MNRLHState extends MNRLNode {
                 List.of(new AbstractMap.SimpleEntry<>(MNRLDefs.H_STATE_OUTPUT, 1)),
                 attributes);
 
-        this.latched = latched;
-        this.reportId = "";
-        this.outputSymbols = new MNRLOutputSymbols().copyFrom(outputSymbols);
+        this.setLatched(latched);
+        this.setReportId("");
+        this.setOutputSymbols(new MNRLOutputSymbols().copyFrom(outputSymbols));
     }
 
     public MNRLHState(final MNRLHState other) {
         super(other);
-        this.latched = other.isLatched();
-        this.reportId = other.getReportId();
-        this.outputSymbols = new MNRLOutputSymbols().copyFrom(other.outputSymbols);
+        this.setLatched(other.isLatched());
+        this.setReportId(other.getReportId());
+        this.setOutputSymbols(new MNRLOutputSymbols().copyFrom(other.getOutputSymbols()));
     }
 
     @Override

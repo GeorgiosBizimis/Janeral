@@ -22,14 +22,14 @@ public class Janeral {
     }
 
     public static MNRLNetwork loadMNRL(final String filename) throws IOException {
-        final File f = new File("src/" + filename);
+        final File file = new File(filename);
         JsonNode jsonNode;
-        if (f.exists()) {
+        if (file.exists()) {
             final Set<ValidationMessage> errors;
             final JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V4);
             final JsonSchema jsonSchema = factory.getSchema(Janeral.class.getResourceAsStream("/edu/stlawu/janeral/resources/mnrl-schema.json"));
             try {
-                jsonNode = mapper.readTree(Janeral.class.getResourceAsStream("/" + filename));
+                jsonNode = mapper.readTree(new FileInputStream(file));
                 errors = jsonSchema.validate(jsonNode);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -38,7 +38,6 @@ public class Janeral {
         } else {
             throw new IOException("ERROR: File " + filename + " could not be found!");
         }
-        //System.out.println(jsonNode.toPrettyString());
 
         final MNRLDecoder d = new MNRLDecoder();
         return d.decode(jsonNode);

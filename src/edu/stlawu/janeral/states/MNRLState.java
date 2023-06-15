@@ -16,7 +16,7 @@ public class MNRLState extends MNRLNode {
         return symbolSet;
     }
 
-    public Boolean isLatched() {
+    public boolean isLatched() {
         return latched;
     }
 
@@ -28,7 +28,7 @@ public class MNRLState extends MNRLNode {
         this.symbolSet = symbolSet;
     }
 
-    public void setLatched(Boolean latched) {
+    public void setLatched(final boolean latched) {
         this.latched = latched;
     }
 
@@ -66,9 +66,9 @@ public class MNRLState extends MNRLNode {
        super.initialize(id, enable, report, Collections.singletonList(new AbstractMap.SimpleEntry<>(MNRLDefs.H_STATE_INPUT, 1)),
                 outputDefs, attributes);
 
-        this.reportId = reportId;
-        this.latched = latched;
-        this.outputSymbols = new HashMap<>(symbolSet);
+        this.setReportId(reportId);
+        this.setLatched(latched);
+        this.setOutputSymbols(new HashMap<>(symbolSet));
     }
 
     @Override
@@ -79,7 +79,7 @@ public class MNRLState extends MNRLNode {
         final Map<String, Object> attributesNode = (Map<String, Object>) map.get("attributes");
 
         if (reportId != null) {
-            attributesNode.put("reportId", reportId.toString());
+            attributesNode.put("reportId", reportId);
         }
 
         attributesNode.put("latched", latched);

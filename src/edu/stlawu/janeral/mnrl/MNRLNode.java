@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.stlawu.janeral.err.EnableError;
 import edu.stlawu.janeral.err.PortDefError;
 
+import java.lang.constant.Constable;
 import java.util.*;
 
 public class MNRLNode {
@@ -16,28 +17,23 @@ public class MNRLNode {
         this.id = id;
     }
 
-    public java.lang.constant.Constable getReportId() {
+    public String getReportId() {
         return reportId;
     }
 
-
-    public void setReportId(final String reportId) {
-        this.reportId = reportId;
+    public void setReportId(final Constable reportId) {
+        this.reportId = String.valueOf(reportId);
     }
 
-    public void setReportId(final int reportId) {
-        this.reportId = reportId;
-    }
-
-    protected java.lang.constant.Constable reportId;
+    protected String reportId;
 
     private String id;
 
-    public int getEnable() {
+    public Integer getEnable() {
         return enable;
     }
 
-    public boolean isReport() {
+    public Boolean isReport() {
         return report;
     }
 
@@ -96,6 +92,7 @@ public class MNRLNode {
             throw new EnableError(MNRLDefs.toMNRLEnable(enable));
         }
         this.report = report;
+        this.reportId = attributes.getReportId();
         this.inputDefs = validatePorts(inputDefs, "input");
         this.outputDefs = validatePorts(outputDefs, "output");
         this.attributes = attributes;

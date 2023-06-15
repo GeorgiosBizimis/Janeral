@@ -13,6 +13,7 @@ import edu.stlawu.janeral.mnrl.MNRLAttributes;
 import edu.stlawu.janeral.mnrl.MNRLDefs;
 import edu.stlawu.janeral.mnrl.MNRLNode;
 
+import java.lang.constant.Constable;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +61,8 @@ public class MNRLBoolean extends MNRLNode {
             throw new InvalidGateFormat();
         }
 
-        this.gateType = gateType;
-        this.reportId = reportId;
+        this.setGateType(gateType);
+        this.setReportId(reportId);
     }
 
     public MNRLBoolean(final String gateType,
@@ -69,7 +70,7 @@ public class MNRLBoolean extends MNRLNode {
                        final String id,
                        final int enable,
                        final boolean report,
-                       final int reportId,
+                       final Constable reportId,
                        final MNRLAttributes attributes)
             throws InvalidGatePortCount, EnableError, PortDefError, InvalidGateFormat {
 
@@ -92,14 +93,14 @@ public class MNRLBoolean extends MNRLNode {
             throw new InvalidGateFormat();
         }
 
-        this.gateType = gateType;
-        this.reportId = reportId;
+        this.setGateType(gateType);
+        this.setReportId(reportId);
     }
 
     public MNRLBoolean(final MNRLBoolean other) {
         super(other);
-        this.gateType = other.gateType;
-        this.reportId = other.reportId;
+        this.setGateType(other.gateType);
+        this.setReportId(other.reportId);
     }
 
     @Override
@@ -110,9 +111,8 @@ public class MNRLBoolean extends MNRLNode {
         final Map<String, Object> attributesNode = (Map<String, Object>) map.get("attributes");
 
         if (reportId != null) {
-            attributesNode.put("reportId", reportId.toString());
+            attributesNode.put("reportId", reportId);
         }
-
 
         attributesNode.put("gateType", gateType);
 

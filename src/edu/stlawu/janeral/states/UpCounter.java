@@ -10,6 +10,7 @@ import edu.stlawu.janeral.mnrl.MNRLDefs;
 import edu.stlawu.janeral.mnrl.MNRLNode;
 
 
+import java.lang.constant.Constable;
 import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class UpCounter extends MNRLNode {
     private Integer threshold;
 
     public UpCounter(final int threshold, final int mode, final String id, final boolean report,
-                     final String reportId, final MNRLAttributes attributes)
+                     final Constable reportId, final MNRLAttributes attributes)
             throws UpCounterThresholdError, UpCounterModeError, EnableError, PortDefError {
         super(id, MNRLDefs.ENABLE_ON_START_AND_ACTIVATE_IN, report,
                 List.of(new AbstractMap.SimpleEntry<>(MNRLDefs.UP_COUNTER_COUNT, 1),
@@ -57,7 +58,7 @@ public class UpCounter extends MNRLNode {
             mode != MNRLDefs.ROLLOVER_ON_THRESHOLD)
             throw new UpCounterModeError(mode);
 
-        this.reportId = reportId;
+        this.setReportId(reportId);
         this.mode = MNRLDefs.toMNRLCounterMode(mode);
         this.threshold = threshold;
     }

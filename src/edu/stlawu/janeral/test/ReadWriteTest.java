@@ -5,7 +5,7 @@ import edu.stlawu.janeral.mnrl.MNRLNetwork;
 
 import java.io.IOException;
 
-public class ReadWrite {
+public class ReadWriteTest {
 
     private static String INPUT_FILE_PATH;
     private static String OUTPUT_FILE_PATH;
@@ -36,9 +36,10 @@ public class ReadWrite {
     }
 
     private static void printHelp() {
-        System.out.println("Help: This is the ReadWrite testing program for the Janeral API. " +
-                "Enter the input file path as your first argument and your output file path as your " +
-                "second argument. Make sure to use full paths");
+        System.out.println("""
+                Help: This is the ReadWrite testing program for the Janeral API.\s
+                Enter the input file path as your first argument and your output file path as your second argument.\s
+                Make sure to use full paths and the normal slash '/'.""");
         System.exit(0);
     }
 

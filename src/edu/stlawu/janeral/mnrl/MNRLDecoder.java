@@ -90,7 +90,6 @@ class edu.stlawu.janeral.mnrl.MNRLDecoder(json.JSONDecoder):
 
  */
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -101,8 +100,6 @@ import edu.stlawu.janeral.states.MNRLState;
 import edu.stlawu.janeral.states.UpCounter;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static edu.stlawu.janeral.mnrl.Janeral.mapper;
 

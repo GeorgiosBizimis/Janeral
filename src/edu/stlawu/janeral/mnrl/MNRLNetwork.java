@@ -1,7 +1,6 @@
 package edu.stlawu.janeral.mnrl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import edu.stlawu.janeral.err.*;
 import edu.stlawu.janeral.states.MNRLBoolean;
 import edu.stlawu.janeral.states.MNRLHState;
