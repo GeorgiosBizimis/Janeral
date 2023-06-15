@@ -11,9 +11,33 @@ import edu.stlawu.janeral.mnrl.*;
 import java.util.*;
 
 public class MNRLState extends MNRLNode {
-    private Map<String, String> symbolSet = new HashMap<>();
-    private boolean latched;
-    private Object reportId;
+
+    public Map<String, String> getSymbolSet() {
+        return symbolSet;
+    }
+
+    public Boolean isLatched() {
+        return latched;
+    }
+
+    public Map<String, String> getOutputSymbols() {
+        return outputSymbols;
+    }
+
+    public void setSymbolSet(Map<String, String> symbolSet) {
+        this.symbolSet = symbolSet;
+    }
+
+    public void setLatched(Boolean latched) {
+        this.latched = latched;
+    }
+
+    public void setOutputSymbols(Map<String, String> outputSymbols) {
+        this.outputSymbols = outputSymbols;
+    }
+
+    private Map<String, String> symbolSet;
+    private Boolean latched;
     private Map<String, String> outputSymbols;
 
     public MNRLState(final MNRLOutputSymbols.ListSymbols outputSymbols,
@@ -25,12 +49,14 @@ public class MNRLState extends MNRLNode {
                      final MNRLAttributes attributes) throws PortDefError, EnableError {
         super();
 
+        symbolSet = new HashMap<>();
+
         final List<Map.Entry<String, Object>> outputDefs = new ArrayList<>();
         for (Map.Entry<String, String> output : outputSymbols.getSymbols()) {
             final String outputId = output.getKey();
-            final String symbolSet = output.getValue();
+            final String symbols = output.getValue();
             if (outputId != null) {
-                this.symbolSet.put(outputId, symbolSet);
+                symbolSet.put(outputId, symbols);
                 outputDefs.add(new AbstractMap.SimpleEntry<>(outputId, 1));
             } else {
                 throw new PortDefError("output");
@@ -45,22 +71,21 @@ public class MNRLState extends MNRLNode {
         this.outputSymbols = new HashMap<>(symbolSet);
     }
 
+    @Override
     public Map<String, Object> toJSON() throws JsonProcessingException {
-        final ObjectMapper mapper = new ObjectMapper();
+        final Map<String, Object> map = super.toJSON();
+        map.put("type", "hState");
 
-        final ObjectNode j = (ObjectNode) super.toJSON();
-        j.put("type", "hState");
+        final Map<String, Object> attributesNode = (Map<String, Object>) map.get("attributes");
 
         if (reportId != null) {
-            final ObjectNode attributesNode = (ObjectNode) j.get("attributes");
             attributesNode.put("reportId", reportId.toString());
         }
 
-        final ObjectNode attributesNode = (ObjectNode) j.get("attributes");
         attributesNode.put("latched", latched);
-        attributesNode.put("symbolSet", mapper.writeValueAsString(outputSymbols));
+        attributesNode.put("symbolSet", outputSymbols);
 
-        return Janeral.mapper.convertValue(j, new TypeReference<>(){});
+        return map;
     }
 
 }

@@ -1,8 +1,6 @@
 package edu.stlawu.janeral.states;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import edu.stlawu.janeral.err.EnableError;
 import edu.stlawu.janeral.err.PortDefError;
 import edu.stlawu.janeral.mnrl.*;
@@ -17,10 +15,6 @@ public class MNRLHState extends MNRLNode {
         return latched;
     }
 
-    public java.lang.constant.Constable getReportId() {
-        return reportId;
-    }
-
     public MNRLOutputSymbols.StringSymbols getOutputSymbols() {
         return outputSymbols;
     }
@@ -29,20 +23,12 @@ public class MNRLHState extends MNRLNode {
         this.latched = latched;
     }
 
-    public void setReportId(final String reportId) {
-        this.reportId = reportId;
-    }
-
-    public void setReportId(final int reportId) {
-        this.reportId = reportId;
-    }
-
     public void setOutputSymbols(final MNRLOutputSymbols.StringSymbols outputSymbols) {
         this.outputSymbols = outputSymbols;
     }
 
     private boolean latched;
-    private java.lang.constant.Constable reportId;
+
     private MNRLOutputSymbols.StringSymbols outputSymbols;
 
     public MNRLHState(final MNRLOutputSymbols.StringSymbols outputSymbols,

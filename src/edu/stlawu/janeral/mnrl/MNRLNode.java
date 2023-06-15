@@ -16,6 +16,21 @@ public class MNRLNode {
         this.id = id;
     }
 
+    public java.lang.constant.Constable getReportId() {
+        return reportId;
+    }
+
+
+    public void setReportId(final String reportId) {
+        this.reportId = reportId;
+    }
+
+    public void setReportId(final int reportId) {
+        this.reportId = reportId;
+    }
+
+    protected java.lang.constant.Constable reportId;
+
     private String id;
 
     public int getEnable() {
@@ -155,10 +170,8 @@ public class MNRLNode {
         final Map<String, Map.Entry<Integer, ArrayList<MNRLConnection>>> validatedPorts = new HashMap<>();
         try {
             for(Map.Entry<String, Object> entry : portDefs) {
-                System.out.println(entry);
                 final String portId = entry.getKey();
                 final int width = Integer.parseInt(entry.getValue().toString());
-                System.out.println(portId + width);
                 if (portId != null) {
                     if (validatedPorts.containsKey(portId)) {
                         throw new edu.stlawu.janeral.err.DuplicateIdError(portId);
@@ -174,7 +187,7 @@ public class MNRLNode {
                 }
             }
         } catch (Exception e) {
-            //System.out.println(Arrays.toString(e.getStackTrace()));
+            System.out.println(Arrays.toString(e.getStackTrace()));
             throw new edu.stlawu.janeral.err.PortDefError(inout);
         }
         return validatedPorts;

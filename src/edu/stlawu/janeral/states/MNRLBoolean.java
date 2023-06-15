@@ -26,20 +26,11 @@ public class MNRLBoolean extends MNRLNode {
         return gateType;
     }
 
-    public String getReportId() {
-        return reportId.toString();
-    }
-
     public void setGateType(String gateType) {
         this.gateType = gateType;
     }
 
-    public void setReportId(String reportId) {
-        this.reportId = reportId;
-    }
-
     private String gateType;
-    private java.io.Serializable reportId;
 
     public MNRLBoolean(final String gateType,
                        final int portCount,
@@ -111,16 +102,21 @@ public class MNRLBoolean extends MNRLNode {
         this.reportId = other.reportId;
     }
 
+    @Override
     public Map<String, Object> toJSON() throws JsonProcessingException {
-        final ObjectNode j = (ObjectNode) super.toJSON();
-        j.put("type", "boolean");
+        final Map<String, Object> map = super.toJSON();
+        map.put("type", "boolean");
+
+        final Map<String, Object> attributesNode = (Map<String, Object>) map.get("attributes");
+
         if (reportId != null) {
-            final ObjectNode attributesNode = (ObjectNode) j.get("attributes");
             attributesNode.put("reportId", reportId.toString());
         }
-        final ObjectNode attributesNode = (ObjectNode) j.get("attributes");
+
+
         attributesNode.put("gateType", gateType);
 
-        return Janeral.mapper.convertValue(j, new TypeReference<>(){});
+        return map;
     }
+
 }

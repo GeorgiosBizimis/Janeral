@@ -7,11 +7,11 @@ public class MNRLAttributes {
     private final HashMap<String, Object> attributes;
 
     private Object symbolSet;
-    private boolean latched;
+    private Boolean latched;
     private String reportId;
     private String gateType;
     private String mode;
-    private int threshold ;
+    private Integer threshold ;
 
     // Getter and Setter methods
     public Object getSymbolSet() {
@@ -62,6 +62,10 @@ public class MNRLAttributes {
         return mode;
     }
 
+    public void setMode(final int mode) {
+        this.mode = MNRLDefs.toMNRLCounterMode(mode);
+    }
+
     public void setMode(final String mode) {
         this.mode = mode;
     }
@@ -98,12 +102,12 @@ public class MNRLAttributes {
     }
 
     public MNRLAttributes(final MNRLAttributes other) {
-        this.gateType = String.valueOf(other.gateType);
-        this.mode = String.valueOf(other.mode);
-        this.reportId = String.valueOf(other.reportId);
-        this.symbolSet = new MNRLOutputSymbols().copyFrom(other.symbolSet);
-        this.latched = other.latched;
-        this.threshold = other.threshold;
+        this.gateType = String.valueOf(other.getGateType());
+        this.mode = other.getMode();
+        this.reportId = String.valueOf(other.getReportId());
+        this.symbolSet = new MNRLOutputSymbols().copyFrom(other.getSymbolSet());
+        this.latched = other.isLatched();
+        this.threshold = other.getThreshold();
 
         attributes = new HashMap<>() {{
             put("gateType", gateType);
@@ -135,7 +139,7 @@ public class MNRLAttributes {
     }
 
     public MNRLAttributes(final String gateType, final String mode, final String reportId, final Object symbolSet,
-                          final boolean latched, final int threshold, Map<String, Object> more) {
+                          final boolean latched, final int threshold, final Map<String, Object> more) {
         this.gateType = gateType;
         this.mode = mode;
         this.reportId = reportId;

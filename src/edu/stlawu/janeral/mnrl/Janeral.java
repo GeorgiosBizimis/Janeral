@@ -21,9 +21,9 @@ public class Janeral {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    public static MNRLNetwork loadMNRL(final String filename) {
+    public static MNRLNetwork loadMNRL(final String filename) throws IOException {
         final File f = new File("src/" + filename);
-        JsonNode jsonNode = null;
+        JsonNode jsonNode;
         if (f.exists()) {
             final Set<ValidationMessage> errors;
             final JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V4);
@@ -34,9 +34,9 @@ public class Janeral {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            System.err.println("ERROR: " + Arrays.toString(errors.toArray()));
+            if(!errors.isEmpty()) System.err.println("ERROR: " + Arrays.toString(errors.toArray()));
         } else {
-            System.err.println("ERROR: File " + filename + " could not be found!");
+            throw new IOException("ERROR: File " + filename + " could not be found!");
         }
         //System.out.println(jsonNode.toPrettyString());
 

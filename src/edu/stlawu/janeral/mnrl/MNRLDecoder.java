@@ -163,8 +163,6 @@ public class MNRLDecoder extends ObjectMapper {
                             attrNode.get("symbolSet").asText(),
                             attrNode.get("latched").asBoolean(), 0);
                     try {
-                        System.out.println(attributes.getSymbolSet());
-
                         node = new MNRLHState(
                                 new MNRLOutputSymbols().constructAsString(attributes.getSymbolSet().toString()),
                                 MNRLDefs.fromMNRLEnable(n.get("enable").asText()),
