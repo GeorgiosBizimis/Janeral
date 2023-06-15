@@ -29,7 +29,9 @@ public class ReadWriteTest {
 
         try {
             final MNRLNetwork m = Janeral.loadMNRL(INPUT_FILE_PATH);
-            m.exportToFile(OUTPUT_FILE_PATH.formatted(OUTPUT_FILE_PATH.replace("/", "\\")));
+            m.exportToFile(System.getProperty("os.name").contains("Windows")
+                    ? OUTPUT_FILE_PATH.replace("/", "\\")
+                    : OUTPUT_FILE_PATH);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
