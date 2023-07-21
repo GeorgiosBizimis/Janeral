@@ -28,7 +28,6 @@ public class MNRLHState extends MNRLNode {
 
     private boolean latched;
     private MNRLOutputSymbols.StringSymbols outputSymbols;
-
     public MNRLHState(final MNRLOutputSymbols.StringSymbols outputSymbols,
                       final int enable,
                       final String id,
@@ -93,14 +92,14 @@ public class MNRLHState extends MNRLNode {
     }
 
     @Override
-    public Map<String, Object> toJSON() throws JsonProcessingException {
-        final Map<String, Object> map = super.toJSON();
+    public Map<String, Object> toMap() throws JsonProcessingException {
+        final Map<String, Object> map = super.toMap();
         map.put("type", "hState");
 
         final Map<String, Object> attributesNode = (Map<String, Object>) map.get("attributes");
 
         if (reportId != null) {
-            attributesNode.put("reportId", reportId.toString());
+            attributesNode.put("reportId", reportId);
         }
 
         attributesNode.put("latched", latched);

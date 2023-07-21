@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Main-Class: edu.stlawu.janeral.test.ReadWriteTest
+Class-Path: commons-io-2.12.0.jar json-schema-validator-1.0.83.jar jacks
+ on-annotations-2.14.2.jar jackson-dataformat-yaml-2.14.2.jar jackson-co
+ re-2.14.2.jar json-schema-core-1.2.14.jar jackson-databind-2.14.2.jar s
+ lf4j-api-2.0.7.jar Janeral.jar json-schema-validator-1.0.83.jar jackson
+ -annotations-2.14.2.jar jackson-core-2.14.2.jar jackson-dataformat-yaml
+ -2.14.2.jar jackson-databind-2.14.2.jar commons-io-2.12.0.jar slf4j-api
+ -2.0.7.jar json-schema-core-1.2.14.jar Janeral.jar
+

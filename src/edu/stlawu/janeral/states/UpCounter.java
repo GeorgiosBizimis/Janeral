@@ -64,15 +64,15 @@ public class UpCounter extends MNRLNode {
     }
 
     @Override
-    public Map<String, Object> toJSON() throws JsonProcessingException {
-        final Map<String, Object> map = super.toJSON();
+    public Map<String, Object> toMap() throws JsonProcessingException {
+        final Map<String, Object> map = super.toMap();
 
         map.put("type", "hState");
 
         final Map<String, Object> attributesNode = (Map<String, Object>) map.get("attributes");
 
         if (reportId != null) {
-            attributesNode.put("reportId", reportId.toString());
+            attributesNode.put("reportId", reportId);
         }
 
         attributesNode.put("mode", mode);

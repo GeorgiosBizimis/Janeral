@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.stlawu.janeral.err.EnableError;
 import edu.stlawu.janeral.err.PortDefError;
 
+import java.io.Serializable;
 import java.lang.constant.Constable;
 import java.util.*;
 
@@ -17,17 +18,13 @@ public class MNRLNode {
         this.id = id;
     }
 
-    public String getReportId() {
+    public Constable getReportId() {
         return reportId;
     }
 
     public void setReportId(final Constable reportId) {
-        this.reportId = String.valueOf(reportId);
+        this.reportId = reportId;
     }
-
-    protected String reportId;
-
-    private String id;
 
     public Integer getEnable() {
         return enable;
@@ -69,6 +66,8 @@ public class MNRLNode {
         this.attributes = attributes;
     }
 
+    protected Constable reportId;
+    private String id;
     private int enable;
     private boolean report;
     private Map<String, Map.Entry<Integer, ArrayList<MNRLConnection>>> inputDefs;
@@ -91,6 +90,7 @@ public class MNRLNode {
         if (!isValidEnable(enable)) {
             throw new EnableError(MNRLDefs.toMNRLEnable(enable));
         }
+        this.enable = enable;
         this.report = report;
         this.reportId = attributes.getReportId();
         this.inputDefs = validatePorts(inputDefs, "input");
@@ -111,7 +111,7 @@ public class MNRLNode {
 
     }
 
-    public Map<String, Object> toJSON() throws JsonProcessingException {
+    public Map<String, Object> toMap() throws JsonProcessingException {
         // Define the enable string
         final String enableString = MNRLDefs.toMNRLEnable(enable);
 
@@ -142,15 +142,15 @@ public class MNRLNode {
             outputDefsList.add(outputDef);
         }
 
-        Map<String, Object> jsonMap = new HashMap<>();
-        jsonMap.put("id", id);
-        jsonMap.put("report", report);
-        jsonMap.put("enable", enableString);
-        jsonMap.put("inputDefs", inputDefsList);
-        jsonMap.put("outputDefs", outputDefsList);
-        jsonMap.put("attributes", new HashMap<>());
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put("report", report);
+        map.put("enable", enableString);
+        map.put("inputDefs", inputDefsList);
+        map.put("outputDefs", outputDefsList);
+        map.put("attributes", new HashMap<>());
 
-        return jsonMap;
+        return map;
     }
 
     public Map<String, Map.Entry<Integer, ArrayList<MNRLConnection>>> getOutputConnections() {
@@ -191,9 +191,6 @@ public class MNRLNode {
     }
 
     private boolean isValidEnable(int enable) {
-        if(enable == -1)
-            enable = MNRLDefs.ENABLE_ON_ACTIVATE_IN;
-
         return enable == MNRLDefs.ENABLE_ALWAYS ||
                 enable == MNRLDefs.ENABLE_ON_ACTIVATE_IN ||
                 enable == MNRLDefs.ENABLE_ON_START_AND_ACTIVATE_IN ||

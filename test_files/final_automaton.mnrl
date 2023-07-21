@@ -1,0 +1,93 @@
+{
+  "nodes": [
+    {
+      "enable": "onActivateIn",
+      "outputDefs": [
+        {
+          "width": 1,
+          "activate": [
+            {
+              "portId": "i",
+              "id": "_4"
+            }
+          ],
+          "portId": "o"
+        }
+      ],
+      "inputDefs": [
+        {
+          "width": 1,
+          "portId": "i"
+        }
+      ],
+      "report": true,
+      "attributes": {
+        "symbolSet": "[\\x00-\\xff\\xff]",
+        "latched": false
+      },
+      "type": "hState",
+      "id": "_4"
+    },
+    {
+      "enable": "onStartAndActivateIn",
+      "outputDefs": [
+        {
+          "width": 1,
+          "activate": [
+            {
+              "portId": "i",
+              "id": "_4"
+            }
+          ],
+          "portId": "o"
+        }
+      ],
+      "inputDefs": [
+        {
+          "width": 1,
+          "portId": "i"
+        }
+      ],
+      "report": true,
+      "attributes": {
+        "symbolSet": "[\\x62]",
+        "latched": false
+      },
+      "type": "hState",
+      "id": "_3"
+    },
+    {
+      "enable": "onStartAndActivateIn",
+      "outputDefs": [
+        {
+          "width": 1,
+          "activate": [
+            {
+              "portId": "i",
+              "id": "_0"
+            },
+            {
+              "portId": "i",
+              "id": "_3"
+            }
+          ],
+          "portId": "o"
+        }
+      ],
+      "inputDefs": [
+        {
+          "width": 1,
+          "portId": "i"
+        }
+      ],
+      "report": false,
+      "attributes": {
+        "symbolSet": "[\\x61]",
+        "latched": false
+      },
+      "type": "hState",
+      "id": "_0"
+    }
+  ],
+  "id": "lstar"
+}

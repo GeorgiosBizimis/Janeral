@@ -10,11 +10,29 @@ import edu.stlawu.janeral.states.UpCounter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.constant.Constable;
 import java.util.*;
 
 public class MNRLNetwork {
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Iterator<MNRLNode> nodeIterator() {
+        return nodes.values().iterator();
+    }
+
+    public ArrayList<MNRLNode> nodeList() {
+        return new ArrayList<>(nodes.values());
+    }
+
     private String id;
-    private Map<String, MNRLNode> nodes;
+    private final Map<String, MNRLNode> nodes;
     private int nodesAdded;
 
     public MNRLNetwork(String id) {
@@ -23,14 +41,14 @@ public class MNRLNetwork {
         this.nodesAdded = 0;
     }
 
-    public String toJSON() throws JsonProcessingException {
+    public String toMap() throws JsonProcessingException {
         Map<String, Object> jsonMap = new HashMap<>();
         jsonMap.put("id", this.id);
         final List<Map<String, Object>> nodesList = new ArrayList<>(nodes.size());
         jsonMap.put("nodes", nodesList);
 
         for(MNRLNode node : this.nodes.values())
-            nodesList.add(node.toJSON());
+            nodesList.add(node.toMap());
 
         return Janeral.mapper.writeValueAsString(jsonMap);
     }
@@ -40,7 +58,7 @@ public class MNRLNetwork {
         file.createNewFile();
 
         try (FileWriter writer = new FileWriter(filename)) {
-            writer.write(this.toJSON());
+            writer.write(this.toMap());
         }
     }
 
@@ -228,7 +246,7 @@ public class MNRLNetwork {
         return id;
     }
 
-    private Map<Object, Object> getConnectionNodeInformation(final Map.Entry<String, String> source,
+    private List<Object> getConnectionNodeInformation(final Map.Entry<String, String> source,
                                                              final Map.Entry<String, String> destination)
             throws UnknownNode, UnknownPort {
         final String sId = source.getKey();
@@ -255,6 +273,7 @@ public class MNRLNetwork {
         final int dInputWidth = dInputInfo.getKey();
         final List<MNRLConnection> dInput = dInputInfo.getValue();
 
-        return Map.of(sId, sPort, sNode, sOutputWidth, sOutput, dId, dPort, dNode, dInputWidth, dInput);
+        return List.of(sId, sPort, sNode, sOutputWidth, sOutput, dId, dPort, dNode, dInputWidth, dInput);
     }
+
 }

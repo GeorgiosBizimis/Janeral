@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="json-schema-validator-1.0.83">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/json-schema-validator-1.0.83.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

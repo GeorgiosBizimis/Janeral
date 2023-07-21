@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class Janeral {
 
-    public final static ObjectMapper mapper;
+    protected final static ObjectMapper mapper;
 
     static {
         mapper = new ObjectMapper();

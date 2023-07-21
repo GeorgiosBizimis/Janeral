@@ -1,14 +1,10 @@
 package edu.stlawu.janeral.states;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import edu.stlawu.janeral.err.EnableError;
 import edu.stlawu.janeral.err.InvalidGateFormat;
 import edu.stlawu.janeral.err.InvalidGatePortCount;
 import edu.stlawu.janeral.err.PortDefError;
-import edu.stlawu.janeral.mnrl.Janeral;
 import edu.stlawu.janeral.mnrl.MNRLAttributes;
 import edu.stlawu.janeral.mnrl.MNRLDefs;
 import edu.stlawu.janeral.mnrl.MNRLNode;
@@ -104,8 +100,8 @@ public class MNRLBoolean extends MNRLNode {
     }
 
     @Override
-    public Map<String, Object> toJSON() throws JsonProcessingException {
-        final Map<String, Object> map = super.toJSON();
+    public Map<String, Object> toMap() throws JsonProcessingException {
+        final Map<String, Object> map = super.toMap();
         map.put("type", "boolean");
 
         final Map<String, Object> attributesNode = (Map<String, Object>) map.get("attributes");
